@@ -1,25 +1,35 @@
 <?php
     session_start();
-    if(!$_SESSION['user_loggedin']){
+    if(!$_SESSION['user_loggedin'] && !$_SESSION['admin_loggedin']){
       header("Location:index.php");
       exit();
   }
 
     include_once 'includes/db.php';
-    $id = $_SESSION['user_id'];
+    $id = (int)$_SESSION['user_id'];
   
       $stmt = $connection->prepare("SELECT * FROM user WHERE id={$id}");
       $stmt->execute();
       $edit_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-      $order_stmt = $connection->prepare("SELECT * FROM order_summary WHERE user_id ={$id}");
+      $order_stmt = $connection->prepare("SELECT * FROM order_summary WHERE  user_id ={$id}");
       $order_stmt->execute();
       $order_info = $order_stmt->fetchAll(PDO::FETCH_ASSOC);
-     
+
+if(isset ($_GET['order_id'])){
+  $id=$_GET['order_id'];
+      $order_summary = $connection->prepare("SELECT * FROM order_summary 
+      INNER JOIN user ON user.id = order_summary.user_id WHERE order_id ={$id}");
+      $order_summary->execute();
+      $order_summary = $order_summary->fetch(PDO::FETCH_ASSOC);
+$invoice_info = $order_summary['cart_after_shopping'];
+$products = json_decode($invoice_info);
 // echo "<pre>";
-// var_dump($order_info);
+// var_dump($products);
 // die;
+}
+
 
    
     include("./includes/public-header.php");
@@ -78,6 +88,10 @@
                       <p>From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
                     </div>
                   </div>
+                 
+
+
+
                   <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                     <div class="myaccount-content">
                       <h3>Orders</h3>
@@ -101,14 +115,70 @@
                               <td><?php echo  $info['date_of_creation'] ?></td>
                               <td><?php echo  $info['order_status'] ?></td>
                               <td><?php echo  $info['order_total_price'] ?></td>
-                              <td><a href="shop-cart.php" class="check-btn sqr-btn ">View</a></td>
+                              <td><a href="account.php?order_id=<?php echo $info['order_id']?>" class="check-btn sqr-btn ">View</a></td>
                             </tr>
                             <?php } ?>
                           </tbody>
                         </table>
                       </div>
                     </div>
+                    <div class="myaccount-content">
+                    <?php if(isset($_GET['order_id'])){ ?>
+                   
+                      <h3> info for Order Number (<?php echo $order_summary['order_id']?>) </h3>
+                    
+                      <?php }?>
+                      <div class="myaccount-table table-responsive text-center">
+                        <table class="table table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>product image</th>
+                              <th>product Name</th>
+                              <th>product price</th>
+                              <th>product quantity</th>
+
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                           <?php if(isset($_GET['order_id'])){ ?>
+                            <tr>
+                         
+                            <?php foreach ($products as $product) {?>
+                            
+                              <td class="pt-11 fs-5 pe-lg-6 text-dark fw-boldest "><a href=../../demo1/dist/apps/product-management/products/view.html><?php echo $product->product_name?></a></td>
+                            <td class="d-flex align-items-center">
+																			<div class="symbol  symbol-50px overflow-hidden me-3">
+																				<a href=../../demo1/dist/apps/product-management/products/view.html>
+																					<div class=symbol-label><img src=admin/assets/media/products_images/<?php echo $product->product_image?> alt="Emma Smith" class="w-50"></div>
+																				</a>
+																			</div>
+																		</td>
+                                    
+                                    <td><?php echo  (int)((($product->product_price) * (100 - $product->product_percentage_price)) / 100) * ($product->product_quantity) ?></td>
+                                    <td><?php echo  ($product->product_quantity) ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                    
+                           
+                            
+                          </tbody>
+                          <?php }?>
+                        </table>
+                      </div>
+                    </div>
+                
+
+
+
+
                   </div>
+
+
+
+                  
+                   
+
                   <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="download-tab">
                     <div class="myaccount-content">
                       <h3>Downloads</h3>
