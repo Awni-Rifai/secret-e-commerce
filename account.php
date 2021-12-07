@@ -69,8 +69,24 @@ $products = json_decode($invoice_info);
               <div class="col-lg-3 col-md-4">
                 <nav>
                   <div class="myaccount-tab-menu nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="dashboad-tab" data-bs-toggle="tab" data-bs-target="#dashboad" type="button" role="tab" aria-controls="dashboad" aria-selected="true">Dashboard</button>
-                    <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab" aria-controls="orders" aria-selected="false">Orders</button>
+                      <button class="nav-link <?php if(isset($_GET['order_id'])){
+                          echo "";
+                      } else{
+                          echo"active";
+                      }?>" id="dashboad-tab" data-bs-toggle="tab" data-bs-target="#dashboad" type="button" role="tab" aria-controls="dashboad" aria-selected="<?php if(isset($_GET['order_id'])){
+                          echo "false";
+                      } else{
+                          echo"true";
+                      }?>">Dashboard</button>
+                      <button class="nav-link <?php if(isset($_GET['order_id'])){
+                          echo "active";
+                      } else{
+                          echo"";
+                      }?>" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab" aria-controls="orders" aria-selected="<?php if(isset($_GET['order_id'])){
+                          echo "true";
+                      } else{
+                          echo"false";
+                      }?>">Orders</button>
                     <button class="nav-link" id="account-info-tab" data-bs-toggle="tab" data-bs-target="#account-info" type="button" role="tab" aria-controls="account-info" aria-selected="false">Account Details</button>
                     <a class="nav-link" href="includes/logic.php?logout=true" >Logout</a>
 
@@ -79,7 +95,12 @@ $products = json_decode($invoice_info);
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="dashboad" role="tabpanel" aria-labelledby="dashboad-tab">
+                  <div class="tab-pane fade  <?php
+                  if(isset($_GET['order_id'])){
+                      echo "";}
+                  else{
+                      echo "show active";
+                  }?>" id="dashboad" role="tabpanel" aria-labelledby="dashboad-tab">
                     <div class="myaccount-content">
                       <h3>Dashboard</h3>
                       <div class="welcome">
@@ -92,7 +113,13 @@ $products = json_decode($invoice_info);
 
 
 
-                  <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                  <div class="tab-pane fade <?php
+                  if(isset($_GET['order_id'])){
+                      echo "show active";}
+                  else{
+                      echo "";
+                  }
+                  ?>" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                     <div class="myaccount-content">
                       <h3>Orders</h3>
                       <div class="myaccount-table table-responsive text-center">
