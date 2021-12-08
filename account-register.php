@@ -5,7 +5,7 @@
   <main class="main-content">
     <!--== Start My Account Area Wrapper ==-->
     <section class="account-area mt-5">
-      <div class="container">
+      <div class="container" style="padding-top:0px">
         <div class="row">
           <div class="col-sm-8 m-auto">
             <div class="section-title text-center">

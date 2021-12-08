@@ -20,7 +20,7 @@ if (isset($_POST['search_for_product'])) {
   <!--        RELOAD              -->
   <meta http-equiv="refresh" content="<?php echo $RELOAD_TIMEOUT_MINUTES ?>">
 
-  <title>Shome - Shoes eCommerce Website Template</title>
+  <title>Crystal-Eyewear - The best place to buy glasses</title>
 
   <!--== Favicon ==-->
   <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
@@ -73,7 +73,7 @@ if (isset($_POST['search_for_product'])) {
                     <div class="info-items">
                       <ul>
                         <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+00 123 456 789</a></li>
-                        <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">demo@example.com</a></li>
+                        <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">Crystaleyewear@info.jo</a></li>
                          <?php if(isset( $_SESSION['admin_loggedin'])){
                              if( $_SESSION['admin_loggedin']===true){?>
                                  <li class="account">
