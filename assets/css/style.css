@@ -8707,7 +8707,7 @@ span.price {
     box-shadow: none;
     border-radius: 0;
     border: 1px solid #827e7e;
-    height: 60px;
+    height: 50px;
     padding: 0 20px;
     font-size: 14px;
 }
@@ -8728,7 +8728,7 @@ span.price {
     text-align: center;
     display: block;
     width: 100%;
-    height: 60px;
+    height: 50px;
     line-height: 64px;
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
@@ -8845,7 +8845,7 @@ span.price {
     box-shadow: none;
     border-radius: 0;
     border: 1px solid #827e7e;
-    height: 60px;
+    height: 50px;
     padding: 0 20px;
     font-size: 14px;
 }
@@ -8866,7 +8866,7 @@ span.price {
     text-align: center;
     display: block;
     width: 100%;
-    height: 60px;
+    height: 50px;
     line-height: 64px;
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
@@ -10831,7 +10831,7 @@ span.price {
 }
 
 .myaccount-content .account-details-form .single-input-item input {
-    border: 1px solid #e8e8e8;
+    border: 1px solid #827e7e;
     width: 100%;
     height: 50px;
     background-color: transparent;

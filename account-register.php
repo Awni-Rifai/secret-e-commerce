@@ -4,7 +4,7 @@
   <!--== End Header Wrapper ==-->
   <main class="main-content">
     <!--== Start My Account Area Wrapper ==-->
-    <section class="account-area mt-5">
+    <section class="account-area">
       <div class="container" style="padding-top:0px">
         <div class="row">
           <div class="col-sm-8 m-auto">
@@ -34,7 +34,7 @@
                     <div class="form-group">
                       <label for="full_name">Name<span class="required">*</span></label>
                       <input id="full_name" class="form-control" name="full_name" type="text">
-                        <small class="form-text text-muted mx-4 d-block">The name should be consisted of two parts </small>
+                        <small class="form-text text-muted mx-4 d-block">Name Should consist of two parts </small>
                         <?php if(isset($_GET["full_name"])):?>
                         <span class="text-danger"><?php echo $_GET["full_name"]; ?></span>
                         <?php endif; ?>
